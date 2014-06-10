@@ -1,0 +1,15 @@
+AddDefaultCharset UTF-8
+
+AddType text/html html
+AddType application/x-httpd-php php
+
+<FilesMatch "users.csv|groups.csv|config.inc.php" >
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTPS} off
+	RewriteRule registration.php https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>

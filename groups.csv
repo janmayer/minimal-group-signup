@@ -1,0 +1,14 @@
+#;id;name;description;"maximum users";"current users"
+1;"Group 1";"Mo, 08:00-09:30 - Room A";17;15
+2;"Group 2";"Mo, 08:00-09:30 - Room B";15;14
+3;"Group 3";"Mo, 08:00-09:30 - Room C";20;0
+4;"Group 4";"Mo, 08:00-09:30 - Room D";10;5
+5;"Group 5";"Mo, 10:00-11:30 - Room A";20;20
+6;"Group 6";"Mo, 10:00-11:30 - Room B";20;20
+7;"Group 7";"Mo, 10:00-11:30 - Room C";20;20
+8;"Group 8";"Mo, 12:00-13:30 - Room A";20;1
+9;"Group 9";"Mo, 12:00-13:30 - Room B";20;1
+10;"Group 10";"Mo, 12:00-13:30 - Room C";20;20
+11;"Group 11";"Mo, 14:00-15:30 - Room A";20;0
+12;"Group 12";"Mo, 16:00-17:30 - Room A";20;0
+13;"Group 13";"Mo, 16:00-17:30 - Room B";20;0
