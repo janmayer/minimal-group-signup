@@ -2,6 +2,7 @@
 
 ## A PHP, CSV & jQuery based registration form for groups with size limit.
 
+This script provides a form for users to register for groups with size limitation. If a user signs up for a group, its size will be incremented. Once the maximum capacity is reached, it can no longer be joined.
 
 [See the demo here.](https://www.ikp.uni-koeln.de/~jmayer/github/minimal-group-signup/registration.php)
 
@@ -17,8 +18,10 @@ Make sure that your server can access the `.php` and `.htaccess` files, and can 
 PHP doesn't support simple file line based editing like your text editor. The script was used for 300 students over the course of one day, no technical problems were found. If you expect several submits within fractions of a second, you should probably use a database.
 
 #### The form doesn't load, i get a strange error!
+If `mod_ssl` is loaded on your server, a `http://` connection is redirected to its `https://` variant via `mod_rewrite`. If your server does not support secure connections anyhow, you can remove the offending part in the `.htaccess`. This is not recommended, as the user input will be transmitted in plain text.
 
 #### What happens if someone inputs irregular chars or spam? I don't see input sanitizing?
+To prevent spam or fuzzy attacks, a maximal number of chars should be used for all input field. PHP's build-in CSV encode/decode functions are used to handle special chars, especially chars used in the CSV "syntax" (e.g. `;`) will be escaped automatically.
 
 #### I don't see any assets in the repository?
 This from uses public [content delivery networks](http://en.wikipedia.org/wiki/Content_delivery_network) providing jQuery (and plugins) as well as the bootstrap CSS (and assets), thus the number of files can be kept minimal.
