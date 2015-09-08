@@ -27,6 +27,11 @@ foreach ($fields as $field) {
 }
 
 /* Check for group size */
+if(!is_writable($file_groups) && !is_writable($file_groups)){
+	$response["status"] = "failed";
+	$response["message"] = "A file is not writable";
+	die(json_encode($response));
+}
 if(find_group($file_groups, $_REQUEST["group"], $group) === false){
 	$response["status"] = "failed";
 	$response["message"] = $message["group_invalid"];

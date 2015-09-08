@@ -22,6 +22,14 @@
 	<div class="well">
 		<h1><?= $content["title"] ?></h1>
 		<h3><?= $content["subtitle"] ?></h3>
+<?php
+	if(!is_writable($file_groups)){
+		print "<div class=\"alert alert-error\">{$file_groups} is not writable!</div>";
+	}
+	if(!is_writable($file_students)){
+		print "<div class=\"alert alert-error\">{$file_students} is not writable!</div>";
+	}
+?>
 		<form id="signup" class="form-horizontal" method="post" action="#">
 			<fieldset>
 				<legend><?= $content["formtitle"] ?></legend>
