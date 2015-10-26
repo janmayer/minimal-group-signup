@@ -73,15 +73,21 @@
 	try {
 		$f = new SplFileObject($file_groups, "r");
 		$data = array();
+		$group_ids = array();
 		while (!$f->eof()) {
 			$data = $f->fgetcsv(";");
 			if ($data[0] != "#" && count($data) > 1){
+				if(in_array($data[0], $group_ids)){
+					print "<div class=\"alert alert-error\">Group ID {$data[0]} is not unique!</div>";
+				} else {
+					$group_ids[] = $data[0];
 ?>
 						<label class="radio">
 							<input type="radio" name="group" id="group<?= $data[0] ?>" value="<?= $data[0] ?>" <?php if($data[4]>=$data[3]){print("disabled");} ?> >
 							<strong><?= $data[1] ?>:</strong>&nbsp;<?= $data[2] ?>&nbsp;(<?= $data[4] ?>/<?= $data[3] ?>)
 						</label>
 <?php
+				}
 			}
 		}
 	} catch (Exception $e) {

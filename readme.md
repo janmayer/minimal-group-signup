@@ -11,11 +11,14 @@ The form comes with frontend and backend validation and can be configured via `c
 
 ### FAQ
 
-#### The script is not working!
-Make sure that your server can access the `.php` and `.htaccess` files, and can write to the `.csv` files. Use e.g. `chmod` to set permissions.
+#### I get the error `<filename>.csv is not writeable`.
+Make sure that your server can access the `.php` and `.htaccess` files, and can write to the `.csv` files. Use e.g. `chmod a+w groups.csv users.csv` to set permissions.
+
+#### I get the error `Group ID <number> is not unique!`.
+Make sure that the group IDs (numbers in the first column in your `groups.csv`) are unique.
 
 ####  Why is the group.csv file rewritten every time? Isn't there a race condition possible?
-PHP doesn't support simple file line based editing like your text editor. The script was used for 300 students over the course of one day, no technical problems were found. If you expect several submits within fractions of a second, you should probably use a database.
+PHP doesn't support simple file line based editing. The script was used for 300 students over the course of one day, no technical problems were found. If you expect several submits within fractions of a second, you should probably use a real database.
 
 #### The form doesn't load, i get a strange error!
 If `mod_ssl` is loaded on your server, a `http://` connection is redirected to its `https://` variant via `mod_rewrite`. If your server does not support secure connections anyhow, you can remove the offending part in the `.htaccess`. This is not recommended, as the user input will be transmitted in plain text.
