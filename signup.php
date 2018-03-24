@@ -50,7 +50,9 @@ update_group($file_groups, $data["group"]);
 
 /* Send mail */
 if($send_mail === true){
-	$m_subject = $message["mail_subject"];
+	$preferences = array('input-charset' => 'UTF-8', 'output-charset' => 'UTF-8');
+	$m_subject = iconv_mime_encode('Subject', $message["mail_subject"], $preferences);
+	$m_subject = substr($m_subject, strlen('Subject: '));
 	$m_message = sprintf($message["mail_message"], $data["firstname"], $data["lastname"], $group[1], $group[2]); // customize mail message here
 	$m_header = "MIME-Version: 1.0\n";
 	$m_header .= "Content-type: text/plain; charset=utf-8\n";
