@@ -49,7 +49,7 @@ add_student($file_students, $data);
 update_group($file_groups, $data["group"]);
 
 /* Send mail */
-if($send_mail == true){
+if($send_mail === true){
 	$m_subject = $message["mail_subject"];
 	$m_message = sprintf($message["mail_message"], $data["firstname"], $data["lastname"], $group[1], $group[2]); // customize mail message here
 	$m_header = "MIME-Version: 1.0\n";
@@ -75,16 +75,25 @@ function validStrLen($str, $min, $max){
 
 function validate($in, &$out, $field, &$response, $message){
 	// optional fields
-	if( $field["min"] == 0 && !array_key_exists( $field["name"], $in)){
+	if( $field["min"] === 0 && !array_key_exists( $field["name"], $in)){
 		$out[$field["name"]] = "";
 		return true;
 	}
 	// required fields
+    elseif( array_key_exists( $field["name"], $in)
+    	&& $field["type"] === "number"
+    	&& $in[$field["name"]] >= $field["min"]
+    	&& $in[$field["name"]] <= $field["max"])
+    {
+		$out[$field["name"]] = $in[$field["name"]];
+		return true;
+	}
     elseif( array_key_exists( $field["name"], $in) && validStrLen( $in[$field["name"]], $field["min"], $field["max"])){
 		$out[$field["name"]] = $in[$field["name"]];
 		return true;
+	}
 	// invalid fields
-	} else {
+	else {
 		$response["status"] = "failed";
 		$response["message"] = $message["field_invalid"] . $field["name"];
 		return false;
@@ -94,7 +103,7 @@ function validate($in, &$out, $field, &$response, $message){
 function find_group($file, $id, &$out){
 	if (($handle = fopen($file, "r")) !== false) {
 		while (($group = fgetcsv($handle, 0, ";")) !== false) {
-			if($group[0] == $id){
+			if($group[0] === $id){
 				$out = $group;
 				return true;
 			}
@@ -114,7 +123,7 @@ function update_group($file, $id){
 		}
 		rewind($handle);
 		foreach($data as $group){
-			if($group[0] == $id){
+			if($group[0] === $id){
 				$group[4] = $group[4] + 1;
 			}
 			if(count($group) > 1){ // Prevent php from applying new lines every time
@@ -136,5 +145,3 @@ function add_student($file, $data){
 	}
 	return true;
 }
-
-?>

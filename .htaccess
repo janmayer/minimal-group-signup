@@ -20,3 +20,6 @@ RedirectMatch 404 /\.git
 		RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 	</IfModule>
 </IfModule>
+
+# Set signup form as home page
+DirectoryIndex registration.php
